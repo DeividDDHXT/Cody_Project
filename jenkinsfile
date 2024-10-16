@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
 
-                sh 'py manage.py run server'
+                sh 'py manage.py runserver'
                 echo "Etapa BUILD no disponible"
             }
         }
