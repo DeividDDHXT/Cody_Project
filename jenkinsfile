@@ -7,12 +7,7 @@ pipeline {
                 // Instalar dependencias de Python
                 sh 'pip install -r requirements.txt'
                 
-                // Ejecutar migraciones
-                sh 'python manage.py migrate'
-                
-                // Compilar archivos estáticos
-                sh 'python manage.py collectstatic --noinput'
-            }
+         
         }
         stage('Tests') {
             steps {
@@ -23,8 +18,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Detener servicios antiguos y reconstruir contenedores Docker
-                sh "docker-compose down -v"
-                sh "docker-compose up -d --build"
+           echo 'no disponible'
             }
         }
     }
