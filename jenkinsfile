@@ -4,21 +4,20 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // I // sh 'python manage.py test'nstalar dependencias de Python
-                sh 'pip install django
-                
-         
+
+                sh 'pip install django'
+                echo "Etapa BUILD no disponible"
+            }
         }
         stage('Tests') {
             steps {
-                // Ejecutar pruebas de Django
-               
+                echo "Etapa TEST no disponible"
             }
         }
         stage('Deploy') {
             steps {
-                // Detener servicios antiguos y reconstruir contenedores Docker
-           echo 'no disponible'
+                sh "docker-compose down -v"
+                sh "docker-compose up -d --build"
             }
         }
     }
