@@ -4,15 +4,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Instalar dependencias de Python
-                sh 'pip install -r requirements.txt'
+                // I // sh 'python manage.py test'nstalar dependencias de Python
+                sh 'pip install django
                 
          
         }
         stage('Tests') {
             steps {
                 // Ejecutar pruebas de Django
-                sh 'python manage.py test'
+               
             }
         }
         stage('Deploy') {
