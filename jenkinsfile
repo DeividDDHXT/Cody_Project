@@ -1,24 +1,52 @@
 pipeline {
     agent any
-
+    
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-
-               
-                echo "Etapa BUILD no disponible"
+                // Clonar el repositorio
+                git 'https://github.com/DeividDDHXT/Cody_Project.git'
             }
         }
-        stage('Tests') {
+        stage('Install Dependencies') {
             steps {
-                echo "Etapa TEST no disponible"
+                // Configurar el entorno virtual y activar
+                sh 'python3 -m venv venv'
+                sh '. venv/bin/activate'
+                
+                // Instalar dependencias desde requirements.txt
+                sh 'pip install -r requirements.txt'
             }
         }
-        stage('Deploy') {
+        stage('Run Tests') {
             steps {
-                echo "Etapa TEST no disponible"
+                // Ejecutar las pruebas del proyecto Django
+                sh 'python manage.py test'
+            }
+        }
+        stage('Migrations') {
+            steps {
+                // Aplicar migraciones a la base de datos
+                sh 'python manage.py migrate'
+            }
+        }
+        stage('Run Server') {
+            steps {
+                // Ejecutar el servidor de desarrollo para probar localmente
+                sh 'python manage.py runserver'
             }
         }
     }
+    post {
+        always {
+            // Limpiar el entorno al finalizar
+            sh 'deactivate'
+        }
+        success {
+            echo 'Pipeline completado con éxito.'
+        }
+        failure {
+            echo 'El pipeline ha fallado.'
+        }
+    }
 }
-
