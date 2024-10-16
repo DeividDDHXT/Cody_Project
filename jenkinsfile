@@ -5,8 +5,6 @@ pipeline {
         stage('Build') {
             steps {
 
-               bash 'pip install django'
-
                 echo "Etapa BUILD no disponible"
             }
         }
