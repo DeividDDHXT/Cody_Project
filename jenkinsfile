@@ -1,23 +1,28 @@
 pipeline {
     agent any
-
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-
-                echo "Etapa BUILD no disponible"
+                git branch: 'master', url: 'https://github.com/DeividDDHXT/Cody_Project.git'
             }
         }
-        stage('Tests') {
+        stage('Build') {
             steps {
-                echo "Etapa TEST no disponible"
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test'
             }
         }
         stage('Deploy') {
             steps {
-                echo "Etapa TEST no disponible"
+                echo 'Deploying...'
+                // Aquí puedes añadir el script de despliegue
             }
         }
     }
 }
+
 
